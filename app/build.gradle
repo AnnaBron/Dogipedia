@@ -23,6 +23,9 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled = true
+
+        buildConfigField 'String', 'BASE_API_URL', '"https://dog.ceo/api/"'
+
     }
 
     buildTypes {
@@ -61,9 +64,9 @@ dependencies {
 
     // Hilt Dependency Injection
     implementation "com.google.dagger:hilt-android:$versions.hiltVersion"
-    kapt "com.google.dagger:hilt-android-compiler:$versions.hiltVersion"
+    kapt "com.google.dagger:hilt-compiler:$versions.hiltVersion"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hiltLifeCycleVersion"
-    kapt "androidx.hilt:hilt-compiler:$versions.hiltLifeCycleVersion"
+//    kapt "com.google.dagger:hilt-android-compiler:$versions.hiltVersion"
 
     // Retrofit and Moshi json parser
     implementation "com.squareup.retrofit2:retrofit:$versions.retroFitVersion"
@@ -74,4 +77,12 @@ dependencies {
 
     // Logging
     implementation "com.jakewharton.timber:timber:$versions.timberVersion"
+
+    //Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coRoutinesVersion"
+
+    // ViewModel & LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$versions.liveDataLifeCycleExtensionVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.liveDataLifeCycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.liveDataLifeCycleVersion"
 }
