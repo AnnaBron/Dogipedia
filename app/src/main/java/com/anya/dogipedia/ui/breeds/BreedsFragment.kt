@@ -1,4 +1,4 @@
-package com.anya.dogipedia.ui.main
+package com.anya.dogipedia.ui.breeds
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,22 +8,22 @@ import android.view.View
 import android.view.ViewGroup
 import com.anya.dogipedia.R
 
-class MainFragment : Fragment() {
+class BreedsFragment : Fragment() {
 
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance() = BreedsFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: BreedsViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
+        return inflater.inflate(R.layout.breeds_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(BreedsViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

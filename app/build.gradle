@@ -54,6 +54,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayoutVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.livedataVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.livedataVersion"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation "androidx.test.ext:junit:$versions.junitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espressoVersion"

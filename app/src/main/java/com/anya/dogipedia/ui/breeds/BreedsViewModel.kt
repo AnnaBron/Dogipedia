@@ -1,7 +1,7 @@
-package com.anya.dogipedia.ui.main
+package com.anya.dogipedia.ui.breeds
 
 import androidx.lifecycle.ViewModel
 
-class MainViewModel : ViewModel() {
+class BreedsViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }
