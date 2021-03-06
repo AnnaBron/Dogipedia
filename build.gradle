@@ -21,6 +21,10 @@ buildscript {
             'espressoVersion'        : '3.3.0',
             'hiltVersion'            : '2.28.1-alpha',
             'hiltLifeCycleVersion'   : '1.0.0-alpha02',
+            'retroFitVersion'        : '2.9.0',
+            'moshiVersion'           : '1.11.0',
+            'okHttpLoggingVersion'   : '5.0.0-alpha.2',
+            'timberVersion'          : '4.7.1',
     ]
 
     repositories {

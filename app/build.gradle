@@ -64,4 +64,14 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$versions.hiltVersion"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hiltLifeCycleVersion"
     kapt "androidx.hilt:hilt-compiler:$versions.hiltLifeCycleVersion"
+
+    // Retrofit and Moshi json parser
+    implementation "com.squareup.retrofit2:retrofit:$versions.retroFitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$versions.okHttpLoggingVersion"
+    implementation "com.squareup.moshi:moshi:$versions.moshiVersion"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshiVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$versions.retroFitVersion"
+
+    // Logging
+    implementation "com.jakewharton.timber:timber:$versions.timberVersion"
 }
