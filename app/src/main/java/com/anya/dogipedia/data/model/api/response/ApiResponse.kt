@@ -1,4 +1,4 @@
-package com.anya.dogipedia.data.model.api.error
+package com.anya.dogipedia.data.model.api.response
 
 import android.os.Parcelable
 import com.squareup.moshi.Json
@@ -7,8 +7,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @JsonClass(generateAdapter = true)
-data class Error(
+data class ApiResponse(
+    @Json(name = "message") val message: Map<String, List<String>>?,
     @Json(name = "status") val status: String,
-    @Json(name = "message") val message: String?,
-    @Json(name = "code") val code: Int?,
 ) : Parcelable
