@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.anya.dogipedia.inject.viewmodel.ViewModelFactory
 import com.anya.dogipedia.ui.breeds.BreedsViewModel
+import com.anya.dogipedia.ui.dogs.DogsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -17,6 +18,11 @@ abstract class ViewModelModule {
     @Binds
     abstract fun bindBreedsViewModel(
         breedsViewModel: BreedsViewModel
+    ): ViewModel
+
+    @Binds
+    abstract fun bindDogsViewModel(
+        dogsViewModel: DogsViewModel
     ): ViewModel
 
     @Binds
