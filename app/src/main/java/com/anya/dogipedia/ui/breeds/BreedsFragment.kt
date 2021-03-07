@@ -37,6 +37,7 @@ class BreedsFragment : Fragment(R.layout.breeds_fragment), BreedsListAdapter.OnR
         super.onViewCreated(view, savedInstanceState)
 
         this.parentBreed = null
+        getActivity()?.setTitle("Breeds");
 
         // bind dog list frag
         val binding = BreedsFragmentBinding.bind(view)
@@ -102,12 +103,11 @@ class BreedsFragment : Fragment(R.layout.breeds_fragment), BreedsListAdapter.OnR
             breedsListAdapter.updateDogsList(subBreedsList)
             parentBreed = breed
             getActivity()?.setTitle(breed.capitalize());
-//            (requireActivity() as MainActivity).title = "My title"
         } else {
             if(parentBreed != null){
                 getActivity()?.setTitle("${parentBreed!!} ${breed}".capitalize())
             } else {
-                getActivity()?.setTitle(breed);
+                getActivity()?.setTitle(breed.capitalize());
             }
             findNavController().navigate(
                 BreedsFragmentDirections.actionBreedsFragmentToDogsFragment(
