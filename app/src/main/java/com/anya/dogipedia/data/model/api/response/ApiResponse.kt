@@ -4,10 +4,12 @@ import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class ApiResponse(
-    @Json(name = "message") val message: Map<String, List<String>>?,
-    @Json(name = "status") val status: String,
+    @Json(name = "message") var message: @RawValue Any? = null,
+
+    @Json(name = "status") val status: String
 ) : Parcelable

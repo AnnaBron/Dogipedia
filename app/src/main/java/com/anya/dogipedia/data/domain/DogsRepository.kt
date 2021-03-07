@@ -13,4 +13,6 @@ class DogsRepository
 
     override suspend fun getAllBreeds(): Response<ApiResponse> = apiService.getAllBreeds()
 
+    override suspend fun getAllBreedsImages(breed: String): Response<ApiResponse> = apiService.getDogsByBreed(breed)
+
 }

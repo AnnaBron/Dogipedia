@@ -14,5 +14,4 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindDogsRepository(dogsRepository: DogsRepository): Repositories.DogsRepository
-
 }
