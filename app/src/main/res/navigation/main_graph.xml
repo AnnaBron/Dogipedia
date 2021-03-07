@@ -8,8 +8,9 @@
     <fragment
         android:id="@+id/breedsListFragment"
         android:name="com.anya.dogipedia.ui.breeds.BreedsFragment"
-        android:label="Breeds"
+
         tools:layout="@layout/breeds_fragment">
+
         <action
             android:id="@+id/action_breedsFragment_to_dogsFragment"
             app:destination="@id/dogsFragment"
@@ -19,21 +20,35 @@
             app:popExitAnim="@anim/slide_out_right">
 
             <argument
-                android:name="dog"
+                android:name="subBreed"
+                app:argType="string"
+                app:nullable="true" />
+
+            <argument
+                android:name="breed"
                 app:argType="string"
                 app:nullable="false" />
+
         </action>
     </fragment>
     <fragment
         android:id="@+id/dogsFragment"
         android:name="com.anya.dogipedia.ui.dogs.DogsFragment"
-        android:label="Details"
+
         tools:layout="@layout/dogs_fragment">
 
         <argument
-            android:name="dog"
+            android:name="subBreed"
+            app:argType="string"
+            app:nullable="true" />
+
+        <argument
+            android:name="breed"
             app:argType="string"
             app:nullable="false" />
+
+
+
     </fragment>
 
 </navigation>
