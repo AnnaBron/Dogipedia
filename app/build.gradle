@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -46,6 +47,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    dataBinding {
+        enabled = true
+    }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -85,4 +93,14 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$versions.liveDataLifeCycleExtensionVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.liveDataLifeCycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.liveDataLifeCycleVersion"
+
+    //Glide
+    implementation "com.github.bumptech.glide:glide:$versions.glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$versions.glideVersion"
+
+    // Navigation Components
+    implementation "androidx.navigation:navigation-fragment-ktx:$versions.navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$versions.navigationVersion"
+    implementation "androidx.navigation:navigation-runtime:$versions.navigationRunTimeVersion"
+
 }

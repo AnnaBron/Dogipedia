@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/breedsListFragment">
+
+    <fragment
+        android:id="@+id/breedsListFragment"
+        android:name="com.anya.dogipedia.ui.breeds.BreedsFragment"
+        android:label="Breeds"
+        tools:layout="@layout/breeds_fragment">
+        <action
+            android:id="@+id/action_breedsFragment_to_dogsFragment"
+            app:destination="@id/dogsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+
+            <argument
+                android:name="dog"
+                app:argType="string"
+                app:nullable="false" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/dogsFragment"
+        android:name="com.anya.dogipedia.ui.dogs.DogsFragment"
+        android:label="Details"
+        tools:layout="@layout/dogs_fragment">
+
+        <argument
+            android:name="dog"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
+
+</navigation>
