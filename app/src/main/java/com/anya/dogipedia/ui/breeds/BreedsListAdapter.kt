@@ -63,7 +63,7 @@ class BreedsListAdapter (
         override fun bind(item: String): Unit = with(binding) {
             // attach data to bind row view
             item?.let {
-                textViewName.text = item
+                textViewName.text = item.capitalize()
             }
 
         }

@@ -7,5 +7,6 @@ interface Repositories {
     interface DogsRepository {
         suspend fun getAllBreeds(): Response<ApiResponse>
         suspend fun getAllBreedsImages(breed : String): Response<ApiResponse>
+        suspend fun getAllSubBreedsImages(breed: String, subBreed : String): Response<ApiResponse>
     }
 }

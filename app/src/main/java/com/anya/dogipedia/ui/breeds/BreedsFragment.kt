@@ -22,6 +22,7 @@ class BreedsFragment : Fragment(R.layout.breeds_fragment), BreedsListAdapter.OnR
         fun newInstance() = BreedsFragment()
     }
 
+    private var parentBreed: String? = null
     private lateinit var viewModel: BreedsViewModel
     private lateinit var breedsListAdapter: BreedsListAdapter
     private var mIsGrid: Boolean = true
@@ -30,11 +31,12 @@ class BreedsFragment : Fragment(R.layout.breeds_fragment), BreedsListAdapter.OnR
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         breedsListAdapter = BreedsListAdapter(requireContext(), this)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        this.parentBreed = null
 
         // bind dog list frag
         val binding = BreedsFragmentBinding.bind(view)
@@ -94,14 +96,23 @@ class BreedsFragment : Fragment(R.layout.breeds_fragment), BreedsListAdapter.OnR
     }
 
     // any row clicked - navigate to dogs breed image fragment & pass selected row
-    override fun onRowClick(dogDetail: String, position: Int) {
-        val subBreedsList = subBreedsList.get(dogDetail)
-        if(subBreedsList != null && subBreedsList.isNotEmpty()){
+    override fun onRowClick(breed: String, position: Int) {
+        val subBreedsList = subBreedsList.get(breed)
+        if(parentBreed == null && subBreedsList != null && subBreedsList.isNotEmpty()){
             breedsListAdapter.updateDogsList(subBreedsList)
+            parentBreed = breed
+            getActivity()?.setTitle(breed.capitalize());
+//            (requireActivity() as MainActivity).title = "My title"
         } else {
+            if(parentBreed != null){
+                getActivity()?.setTitle("${parentBreed!!} ${breed}".capitalize())
+            } else {
+                getActivity()?.setTitle(breed);
+            }
             findNavController().navigate(
                 BreedsFragmentDirections.actionBreedsFragmentToDogsFragment(
-                    dogDetail
+                    parentBreed,
+                    breed
                 )
             )
         }

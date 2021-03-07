@@ -13,8 +13,8 @@ interface ApiService {
     @GET("breed/{breed}/images")
     suspend fun getDogsByBreed(@Path("breed") breed: String): Response<ApiResponse>
 
-    @GET("breed/{breed}/images/random")
-    suspend fun getRandomDogByBreed(@Path("breed") breed: String): Response<ApiResponse>
+//    @GET("breed/{breed}/images/random")
+//    suspend fun getRandomDogByBreed(@Path("breed") breed: String): Response<ApiResponse>
 
     @GET("breed/{breed}/{subBreed}/images")
     suspend fun getDogsBySubBreed(@Path("breed") breed: String, @Path("subBreed") subBreed: String): Response<ApiResponse>

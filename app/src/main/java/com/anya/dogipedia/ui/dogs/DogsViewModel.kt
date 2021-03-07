@@ -14,7 +14,7 @@ class DogsViewModel
     private val dogsRepository: Repositories.DogsRepository,
 ) : ViewModel() {
 
-    fun getDogsImages(breed: String) = liveData(Dispatchers.IO) {
+    fun getDogsImages(breed: String, subBreed: String?) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
             val result = dogsRepository.getAllBreedsImages(breed)

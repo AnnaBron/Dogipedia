@@ -26,6 +26,7 @@ class DogsFragment : Fragment(R.layout.dogs_fragment) {
     private lateinit var breedsListAdapter: BreedsImagesAdapter
     private var mIsGrid: Boolean = true
     private lateinit var dogBreed: String
+    private var subBreed: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +36,12 @@ class DogsFragment : Fragment(R.layout.dogs_fragment) {
         requireArguments().let {
             DogsFragmentArgs.fromBundle(it).also { args ->
                 // selected row from dogs list
-                dogBreed = args.dog
+                if(args.subBreed != null){
+                    dogBreed = args.subBreed
+                    subBreed = args.breed
+                } else {
+                    dogBreed = args.breed
+                }
             }
         }
     }
@@ -64,7 +70,7 @@ class DogsFragment : Fragment(R.layout.dogs_fragment) {
         try {
             viewModel = ViewModelProvider(this).get(DogsViewModel::class.java)
 
-            viewModel.getDogsImages(dogBreed).observe(viewLifecycleOwner, Observer {
+            viewModel.getDogsImages(dogBreed, subBreed).observe(viewLifecycleOwner, Observer {
                 it?.let { resource ->
                     when (resource.status) {
                         Status.SUCCESS -> {
