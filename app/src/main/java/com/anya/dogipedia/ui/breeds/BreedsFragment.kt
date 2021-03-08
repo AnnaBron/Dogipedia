@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.anya.dogipedia.R
 import com.anya.dogipedia.databinding.BreedsFragmentBinding
 import com.anya.dogipedia.utils.*
@@ -25,7 +27,6 @@ class BreedsFragment : Fragment(R.layout.breeds_fragment), BreedsListAdapter.OnR
     private var parentBreed: String? = null
     private lateinit var viewModel: BreedsViewModel
     private lateinit var breedsListAdapter: BreedsListAdapter
-    private var mIsGrid: Boolean = true
     private lateinit var subBreedsList : Map<String, List<String>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,25 +38,20 @@ class BreedsFragment : Fragment(R.layout.breeds_fragment), BreedsListAdapter.OnR
         super.onViewCreated(view, savedInstanceState)
 
         this.parentBreed = null
-        getActivity()?.setTitle("Breeds");
+        activity?.title = "Breeds";
 
         // bind dog list frag
         val binding = BreedsFragmentBinding.bind(view)
 
-        binding.dogListRecyclerView.layoutManager = GridLayoutManager(context, 3)
-        binding.dogListRecyclerView.adapter = breedsListAdapter
+        binding.dogListRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.dogListRecyclerView.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
 
-        // Small nice to have that allows different view grid and list view
-        binding.gridOrListButton.setOnClickListener {
-            if (mIsGrid) {
-                it.setBackgroundResource(R.drawable.ic_list_view_icon)
-                (binding.dogListRecyclerView.layoutManager as GridLayoutManager).spanCount = 1
-            } else {
-                it.setBackgroundResource(R.drawable.ic_grid_view_icon)
-                (binding.dogListRecyclerView.layoutManager as GridLayoutManager).spanCount = 3
-            }
-            mIsGrid = !mIsGrid
-        }
+        binding.dogListRecyclerView.adapter = breedsListAdapter
 
         try {
             viewModel = ViewModelProvider(this).get(BreedsViewModel::class.java)

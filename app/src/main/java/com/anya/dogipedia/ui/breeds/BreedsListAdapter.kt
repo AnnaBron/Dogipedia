@@ -2,9 +2,11 @@ package com.anya.dogipedia.ui.breeds
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.anya.dogipedia.R
 import com.anya.dogipedia.databinding.DogListRowBinding
 import com.anya.dogipedia.ui.BaseViewHolder
 
@@ -15,6 +17,7 @@ class BreedsListAdapter (
 ) : RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     private var breedsList = listOf<String>()
+    private lateinit var numOfSubBreeds : Map<String, List<String>>
 
     // recycler row listener
     interface OnRowClickListener {
@@ -23,6 +26,7 @@ class BreedsListAdapter (
 
     fun setDogsList(dogsList: Map<String, List<String>>) {
         this.breedsList = dogsList.keys.toList()
+        this.numOfSubBreeds = dogsList
         notifyDataSetChanged()
     }
 
@@ -57,15 +61,21 @@ class BreedsListAdapter (
 
 
     inner class MainViewHolder(
-        val binding: DogListRowBinding,
+        private val binding: DogListRowBinding,
     ) : BaseViewHolder<String>(binding.root) {
 
         override fun bind(item: String): Unit = with(binding) {
             // attach data to bind row view
             item?.let {
-                textViewName.text = item.capitalize()
-            }
+                breedsName.text = item.capitalize()
 
+                if (numOfSubBreeds.get(item)?.size != null && numOfSubBreeds.get(item)?.size!! > 0){
+                    subBreedsQuantity.setText(context.getString(R.string.num_of_sub_breeds) + numOfSubBreeds.get(item)?.size.toString())
+                    subBreedsQuantity.visibility = View.VISIBLE
+                } else {
+                    subBreedsQuantity.visibility = View.GONE
+                }
+            }
         }
     }
 }

@@ -10,7 +10,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:src="@drawable/ic_baseline_error_outline_24" />
+        android:src="@drawable/ic_error" />
 
     <TextView
         android:id="@+id/error"

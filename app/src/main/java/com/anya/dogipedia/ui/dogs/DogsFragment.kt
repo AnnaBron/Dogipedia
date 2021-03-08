@@ -58,10 +58,10 @@ class DogsFragment : Fragment(R.layout.dogs_fragment) {
         // Small nice to have that allows different view grid and list view
         binding.gridOrListButton.setOnClickListener {
             if (mIsGrid) {
-                it.setBackgroundResource(R.drawable.ic_list_view_icon)
+                it.setBackgroundResource(R.drawable.ic_list_view)
                 (binding.dogListRecyclerView.layoutManager as GridLayoutManager).spanCount = 1
             } else {
-                it.setBackgroundResource(R.drawable.ic_grid_view_icon)
+                it.setBackgroundResource(R.drawable.ic_grid_view)
                 (binding.dogListRecyclerView.layoutManager as GridLayoutManager).spanCount = 3
             }
             mIsGrid = !mIsGrid
@@ -82,20 +82,18 @@ class DogsFragment : Fragment(R.layout.dogs_fragment) {
                                 // otherwise create list adapter for the recycler
                                 breedsListAdapter.setDogsImageList(data)
                                 binding.layoutError.root.hide()
-                                binding.progressBar.hide()
                             }
                         }
                         Status.ERROR -> {
                             binding.layoutError.root.error.text =
                                 resource.message //result.httpException?.developerMessage
                             binding.layoutError.root.show()
-                            binding.progressBar.hide()
                             Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
                         }
-                        Status.LOADING -> {
-                            // Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
-                            binding.progressBar.show()
-                        }
+//                        Status.LOADING -> {
+//                            // Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+//                            binding.progressBar.show()
+//                        }
                     }
                 }
             })

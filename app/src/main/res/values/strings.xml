@@ -5,4 +5,6 @@
     <string name="api_error_network">Network unavailable. Please check your internet connection or try again later.</string>
     <string name="api_error_general">Something went wrong</string>
     <string name="api_error_not_found">Breed/Dog not found</string>
+    <string name="num_of_sub_breeds">Number of sub breeds : </string>
+
 </resources>
