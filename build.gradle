@@ -10,27 +10,28 @@ buildscript {
     ]
 
     ext.versions = [
-            'kotlinVersion'           : '1.4.30',
-            'gradleVersion'           : '4.1.2',
-            'ktxVersion'              : '1.3.2',
-            'appcompaVersion'         : '1.2.0',
-            'materialVersion'         : '1.3.0',
-            'constraintlayoutVersion' : '2.0.4',
-            'livedataVersion'         : '2.3.0',
-            'junitVersion'            : '1.1.2',
-            'espressoVersion'         : '3.3.0',
-            'hiltVersion'             : '2.33-beta',
-            'hiltLifeCycleVersion'    : '1.0.0-alpha03',
-            'retroFitVersion'         : '2.9.0',
-            'moshiVersion'            : '1.11.0',
-            'okHttpLoggingVersion'    : '5.0.0-alpha.2',
-            'timberVersion'           : '4.7.1',
-            'coRoutinesVersion'       : '1.3.5',
-            'liveDataLifeCycleVersion': '2.3.0',
+            'kotlinVersion'                    : '1.4.30',
+            'gradleVersion'                    : '4.1.2',
+            'ktxVersion'                       : '1.3.2',
+            'appcompaVersion'                  : '1.2.0',
+            'materialVersion'                  : '1.3.0',
+            'constraintlayoutVersion'          : '2.0.4',
+            'livedataVersion'                  : '2.3.0',
+            'junitVersion'                     : '1.1.2',
+            'espressoVersion'                  : '3.3.0',
+            'hiltVersion'                      : '2.33-beta',
+            'hiltLifeCycleVersion'             : '1.0.0-alpha03',
+            'retroFitVersion'                  : '2.9.0',
+            'moshiVersion'                     : '1.11.0',
+            'okHttpLoggingVersion'             : '5.0.0-alpha.2',
+            'timberVersion'                    : '4.7.1',
+            'coRoutinesVersion'                : '1.3.5',
+            'liveDataLifeCycleVersion'         : '2.3.0',
             'liveDataLifeCycleExtensionVersion': '2.2.0',
-            'glideVersion' : '4.8.0',
-            'navigationVersion' : '2.3.0',
-            'navigationRunTimeVersion' : '2.3.3'
+            'glideVersion'                     : '4.8.0',
+            'navigationVersion'                : '2.3.0',
+            'navigationRunTimeVersion'         : '2.3.3',
+            'merlinVersion'                    : '1.2.0'
 
     ]
 

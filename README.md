@@ -24,7 +24,8 @@ Sample Android app in [Kotlin](https://kotlinlang.org/) for viewing many dogs br
 ## Network  
 * [Square/Retrofit](https://github.com/square/retrofit) - HTTP RESTful connections  
 * [OkHttp 3](https://square.github.io/okhttp/3.x/okhttp/)  
-* [Square/Moshi](https://github.com/square/moshi) - JSON adapter  
+* [Square/Moshi](https://github.com/square/moshi) - JSON adapter
+* [Merlin](https://github.com/novoda/merlin) - Observes network connection status & gives callbacks  
 
   
 ## Other  
@@ -33,7 +34,9 @@ Sample Android app in [Kotlin](https://kotlinlang.org/) for viewing many dogs br
 ### Logging  
 * [Timber](https://github.com/JakeWharton/timber) - A logger with a small, extensible API which provides utility
   
-## Roadmap:  
+## Roadmap:
+* [JUnit4](https://junit.org/junit4/) - Unit testing framework
+* [Mockito-Kotlin](https://github.com/nhaarman/mockito-kotlin) - Unit testing class mocking framework  
 * [Espresso](https://developer.android.com/training/testing/espresso/) - UI testing framework  
 * [ProGuard](https://www.guardsquare.com/en/products/proguard) - Code obfuscation  
 * [Firebase](https://firebase.google.com/) - Analytics  

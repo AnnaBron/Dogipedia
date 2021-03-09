@@ -1,32 +1,34 @@
 package com.anya.dogipedia.ui.dogs
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.anya.dogipedia.R
 import com.anya.dogipedia.databinding.DogsFragmentBinding
 import com.anya.dogipedia.utils.Status
 import com.anya.dogipedia.utils.hide
 import com.anya.dogipedia.utils.show
+import com.novoda.merlin.Merlin
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_error.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class DogsFragment : Fragment(R.layout.dogs_fragment) {
-
-    companion object {
-        fun newInstance() = DogsFragment()
-    }
+class DogsFragment constructor(
+    private val merlin: Merlin
+) : Fragment(R.layout.dogs_fragment) {
 
     private lateinit var viewModel: DogsViewModel
     private lateinit var breedsListAdapter: BreedsImagesAdapter
     private var mIsGrid: Boolean = true
     private lateinit var dogBreed: String
     private var subBreed: String? = null
+    private lateinit var binding: DogsFragmentBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,9 +50,9 @@ class DogsFragment : Fragment(R.layout.dogs_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        merlin.bind()
         // bind dog list frag
-        val binding = DogsFragmentBinding.bind(view)
+        binding = DogsFragmentBinding.bind(view)
 
         binding.dogListRecyclerView.layoutManager = GridLayoutManager(context, 3)
         binding.dogListRecyclerView.adapter = breedsListAdapter
@@ -70,6 +72,31 @@ class DogsFragment : Fragment(R.layout.dogs_fragment) {
 
         viewModel = ViewModelProvider(this).get(DogsViewModel::class.java)
 
+        // Fetch list on fragment load
+        loadDogsList()
+
+        // When internet connection is back
+        merlin.registerConnectable {
+            GlobalScope.launch(Dispatchers.Main) {
+                loadDogsList()
+            }
+
+        }
+
+        // When internet connection is lost
+        merlin.registerDisconnectable {
+            GlobalScope.launch(Dispatchers.Main) {
+                onDogListGetError()
+            }
+        }
+    }
+
+    override fun onStop() {
+        merlin.unbind()
+        super.onStop()
+    }
+
+    fun loadDogsList() {
         viewModel.getDogsImages(dogBreed, subBreed).observe(viewLifecycleOwner, Observer {
             it?.let { resource ->
                 when (resource.status) {
@@ -78,20 +105,25 @@ class DogsFragment : Fragment(R.layout.dogs_fragment) {
                         // if success with no data - show empty view with error
                         if (data == null || data.isEmpty()) {
                             binding.layoutError.root.show()
+                            binding.dogListRecyclerView.hide()
                         } else {
                             // otherwise create list adapter for the recycler
                             breedsListAdapter.setDogsImageList(data)
+                            binding.dogListRecyclerView.show()
                             binding.layoutError.root.hide()
                         }
                     }
                     Status.ERROR -> {
-                        binding.layoutError.root.error.text =
-                            resource.message //result.httpException?.developerMessage
-                        binding.layoutError.root.show()
-                        Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                        onDogListGetError()
                     }
                 }
             }
         })
+    }
+
+    fun onDogListGetError() {
+        binding.layoutError.root.error.text = getString(R.string.api_error_network)
+        binding.dogListRecyclerView.hide()
+        binding.layoutError.root.show()
     }
 }

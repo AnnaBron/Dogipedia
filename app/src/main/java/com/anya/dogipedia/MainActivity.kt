@@ -1,11 +1,10 @@
 package com.anya.dogipedia
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.anya.dogipedia.ui.breeds.BreedsFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

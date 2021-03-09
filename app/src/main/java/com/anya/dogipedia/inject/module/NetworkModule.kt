@@ -1,10 +1,15 @@
 package com.anya.dogipedia.inject.module
 
 
+import android.content.Context
 import com.anya.dogipedia.BuildConfig
+import com.anya.dogipedia.data.exception.ExceptionMappers
 import com.anya.dogipedia.data.exception.api.ApiExceptionMapper
 import com.anya.dogipedia.data.service.interceptors.ExceptionInterceptor
+import com.anya.dogipedia.inject.qualifier.AppContext
+import com.novoda.merlin.Merlin
 import com.squareup.moshi.Moshi
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,6 +34,14 @@ class NetworkModule {
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor { message -> Timber.tag(TIMBER_NETWORK_TAG).d(message) }
             .apply { level = HttpLoggingInterceptor.Level.BODY }
+    }
+
+    @Provides
+    @Singleton
+    fun provideMerlin(
+        @AppContext context: Context,
+    ): Merlin {
+        return Merlin.Builder().withConnectableCallbacks().withDisconnectableCallbacks().build(context)
     }
 
     @Provides
