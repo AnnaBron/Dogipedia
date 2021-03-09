@@ -53,7 +53,6 @@ class BreedsFragment : Fragment(R.layout.breeds_fragment), BreedsListAdapter.OnR
 
         binding.dogListRecyclerView.adapter = breedsListAdapter
 
-        try {
             viewModel = ViewModelProvider(this).get(BreedsViewModel::class.java)
 
             viewModel.getDogs().observe(viewLifecycleOwner, Observer {
@@ -73,8 +72,7 @@ class BreedsFragment : Fragment(R.layout.breeds_fragment), BreedsListAdapter.OnR
                             }
                         }
                         Status.ERROR -> {
-                            binding.layoutError.root.error.text =
-                                resource.message //result.httpException?.developerMessage
+                            binding.layoutError.root.error.text = resource.message
                             binding.layoutError.root.show()
                             binding.progressBar.hide()
                             Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
@@ -86,10 +84,6 @@ class BreedsFragment : Fragment(R.layout.breeds_fragment), BreedsListAdapter.OnR
                     }
                 }
             })
-
-        } catch (e: Exception) {
-            println("TAGTAG" + e.localizedMessage)
-        }
     }
 
     // any row clicked - navigate to dogs breed image fragment & pass selected row

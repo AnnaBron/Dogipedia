@@ -10,6 +10,5 @@ import kotlinx.android.parcel.RawValue
 @JsonClass(generateAdapter = true)
 data class ApiResponse(
     @Json(name = "message") var message: @RawValue Any? = null,
-
     @Json(name = "status") val status: String
 ) : Parcelable

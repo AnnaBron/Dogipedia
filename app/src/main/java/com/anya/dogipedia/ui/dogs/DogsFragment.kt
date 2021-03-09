@@ -36,7 +36,7 @@ class DogsFragment : Fragment(R.layout.dogs_fragment) {
         requireArguments().let {
             DogsFragmentArgs.fromBundle(it).also { args ->
                 // selected row from dogs list
-                if(args.subBreed != null){
+                if (args.subBreed != null) {
                     dogBreed = args.subBreed
                     subBreed = args.breed
                 } else {
@@ -67,40 +67,31 @@ class DogsFragment : Fragment(R.layout.dogs_fragment) {
             mIsGrid = !mIsGrid
         }
 
-        try {
-            viewModel = ViewModelProvider(this).get(DogsViewModel::class.java)
 
-            viewModel.getDogsImages(dogBreed, subBreed).observe(viewLifecycleOwner, Observer {
-                it?.let { resource ->
-                    when (resource.status) {
-                        Status.SUCCESS -> {
-                            var data = resource.data as ArrayList<String>
-                            // if success with no data - show empty view with error
-                            if (data == null || data.isEmpty()) {
-                                binding.layoutError.root.show()
-                            } else {
-                                // otherwise create list adapter for the recycler
-                                breedsListAdapter.setDogsImageList(data)
-                                binding.layoutError.root.hide()
-                            }
-                        }
-                        Status.ERROR -> {
-                            binding.layoutError.root.error.text =
-                                resource.message //result.httpException?.developerMessage
+        viewModel = ViewModelProvider(this).get(DogsViewModel::class.java)
+
+        viewModel.getDogsImages(dogBreed, subBreed).observe(viewLifecycleOwner, Observer {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        var data = resource.data as ArrayList<String>
+                        // if success with no data - show empty view with error
+                        if (data == null || data.isEmpty()) {
                             binding.layoutError.root.show()
-                            Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                        } else {
+                            // otherwise create list adapter for the recycler
+                            breedsListAdapter.setDogsImageList(data)
+                            binding.layoutError.root.hide()
                         }
-//                        Status.LOADING -> {
-//                            // Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
-//                            binding.progressBar.show()
-//                        }
+                    }
+                    Status.ERROR -> {
+                        binding.layoutError.root.error.text =
+                            resource.message //result.httpException?.developerMessage
+                        binding.layoutError.root.show()
+                        Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
                     }
                 }
-            })
-
-        } catch (e: Exception) {
-            println("TAGTAG" + e.localizedMessage)
-        }
+            }
+        })
     }
-
 }

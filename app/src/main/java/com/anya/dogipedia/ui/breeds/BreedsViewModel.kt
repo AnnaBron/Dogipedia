@@ -6,6 +6,7 @@ import com.anya.dogipedia.data.domain.Repositories
 import com.anya.dogipedia.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import java.io.IOException
 import javax.inject.Inject
 
 
@@ -24,8 +25,7 @@ class BreedsViewModel
             } else {
                 emit(Resource.error(data = null, message = result.errorBody()?.string() ?: "Error Occurred!"))
             }
-
-        } catch (exception: Exception) {
+        } catch (exception: IOException) {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
     }

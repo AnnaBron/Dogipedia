@@ -2,11 +2,12 @@ package com.anya.dogipedia.inject.module
 
 
 import com.anya.dogipedia.BuildConfig
+import com.anya.dogipedia.data.exception.api.ApiExceptionMapper
+import com.anya.dogipedia.data.service.interceptors.ExceptionInterceptor
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.FragmentComponent
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -32,14 +33,26 @@ class NetworkModule {
 
     @Provides
     @Singleton
+    fun provideExceptionInterceptor(
+        apiExceptionMapper: ApiExceptionMapper,
+        moshi: Moshi
+    ): ExceptionInterceptor {
+        return ExceptionInterceptor(apiExceptionMapper, moshi)
+    }
+
+
+    @Provides
+    @Singleton
     fun provideOkHttp(
         loggingInterceptor: HttpLoggingInterceptor,
+        exceptionInterceptor: ExceptionInterceptor,
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .apply {
                 connectTimeout(NETWORK_TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 readTimeout(NETWORK_TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 writeTimeout(NETWORK_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                addInterceptor(exceptionInterceptor)
                 if (BuildConfig.DEBUG) {
                     addInterceptor(loggingInterceptor)
                 }
