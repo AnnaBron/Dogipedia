@@ -1,9 +1,7 @@
 
 # Dogipedia    
+![dogipedia_icon](https://raw.githubusercontent.com/AnnaBron/Dogipedia/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)  
 
-![dogipedia_icon](https://github.com/AnnaBron/Dogipedia/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
-https://raw.githubusercontent.com/AnnaBron/Dogipedia/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?token=ADNIDIB4T6WMF2GTZVZVN33AI7HLE
-  
 Sample Android app in [Kotlin](https://kotlinlang.org/) for viewing many dogs breeds and images based on [Dog API](https://dog.ceo/dog-api/).  
   
 ## Building the app  
@@ -27,7 +25,6 @@ Sample Android app in [Kotlin](https://kotlinlang.org/) for viewing many dogs br
 * [Square/Retrofit](https://github.com/square/retrofit) - HTTP RESTful connections  
 * [OkHttp 3](https://square.github.io/okhttp/3.x/okhttp/)  
 * [Square/Moshi](https://github.com/square/moshi) - JSON adapter  
-
   
 ## Other  
 ### Images  
